@@ -28,11 +28,12 @@ def main():
         current_file_replaced = str(current_file_path)
         current_file_replaced = current_file_replaced.replace('/', '\\')
 
-        # Define the command and arguments for ASTAP
-        command = "\"C:\\Program Files\\astap\\astap.exe\" -f \"" + current_file_replaced + "\" -sqm 2046"
-        print(command)
-        # Run the command
-        #result = run(command, shell=True, capture_output=True, text=True)
+        if not os.path.exists(current_file_path[:-3] + 'ini'):
+            # Define the command and arguments for ASTAP
+            command = "\"C:\\Program Files\\astap\\astap.exe\" -f \"" + current_file_replaced + "\" -sqm 2046"
+            print(command)
+            # Run the command
+            result = run(command, shell=True, capture_output=True, text=True)
 
         # read sqm from file.
         # open file as .ini and add dummy section
