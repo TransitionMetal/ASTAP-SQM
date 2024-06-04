@@ -6,5 +6,4 @@ This is a script on Python to plot the SQM (sky brightess in mag/arcsec^2) on ti
 4. Find the mean value of your Dark frames. You can press 'Show Stack Menu' button (with Sigma sign), go to 'Darks' tab and load your darks ('Browse' button). Than replace it with master dark by pressing 'Replace check-marked by one or more master dark'. You will find the mean value in this window. Use 'Analyse' button if needed.
 5. Substitute this mean value into the command in line ?? of the main.py file.
 6. Also change the default folder in line ??
-7. If you have original files with correct creation time, choose "C" (means creation time) in line ??. Otherwise choose "N" (means Name). Than on X axis will be file names.
-8. Run the script, choose files and wait until they are processed. Enjoy the SQM plot and data saved in *.spc text file.
+7. Run the script, choose files and wait until they are processed. Enjoy the SQM plot and data saved in *.spc text file.
