@@ -5,11 +5,10 @@ import numpy as np
 from matplotlib import pyplot as plt
 import mplcyberpunk
 from tkinter import filedialog
-import configparser
 import re
 
 def main():
-    time_zone = np.timedelta64(3, 'h')
+    time_zone = np.timedelta64(2, 'h')
     file_path = filedialog.askopenfilename(
         title="Выберите файл",
         initialdir=r'C:\YandexDisk\Astronomy\2do\\',  # \\ to protect '
@@ -52,6 +51,9 @@ def main():
     sqm = np.transpose(sqm)
     creation_time = np.transpose(creation_time)
     creation_time_str = creation_time.astype(str)
+    sqm = sqm[np.argsort(creation_time)]
+    creation_time_str = creation_time_str[np.argsort(creation_time)]
+    creation_time = creation_time[np.argsort(creation_time)]
     np.savetxt(current_file_replaced[:-3] + "spc",
                np.column_stack((creation_time_str, sqm)), fmt='%s %s', delimiter=' ')
 
