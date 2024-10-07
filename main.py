@@ -9,21 +9,27 @@ from tkinter import filedialog
 import re
 
 def main():
+    # time zone for correcting the axis, because extracted is UTC time
     time_zone = np.timedelta64(3, 'h')
+    # file open dialog window
     file_path = filedialog.askopenfilename(
         title="Выберите файл",
         initialdir=r'C:\YandexDisk\Astronomy\2do\\',  # \\ to protect '
         filetypes=[(['cr2', 'fit', 'xisf'], ['*.cr2', '*.fit', '*.xisf'])],  # to see which files are already processed
         multiple=True)
 
+    # prepare empty numpy array for SQM values
     sqm = np.array([], dtype=float)
+    # prepare empty numpy array for date and time
     creation_time = np.array([], dtype='datetime64')
 
+    # main loop for file list
     for current_file_path in file_path:
-        # replace / by \ in file path
+        # convert file path to string
         current_file_replaced = str(current_file_path)
+        # replace / by \ in file path
         current_file_replaced = current_file_replaced.replace('/', '\\')
-        # check if file already solved
+        # check if file already solved (is there a *.wcs file)
         if not os.path.exists(current_file_path[:-3] + 'wcs'):
             # Define the command and arguments for ASTAP
             command = "\"C:\\Program Files\\astap\\astap.exe\" -f \"" + current_file_replaced + "\" -sqm 2046"
@@ -36,6 +42,7 @@ def main():
         if os.path.exists(current_file_path[:-3] + 'wcs'):
             with open(current_file_replaced[:-3] + 'wcs', 'r') as file:
                 config_string = file.read()
+            # find the strtings
             sqm_string = re.findall(r'SQM.*Sky background \[magn/arcsec\^2]\n', config_string)
             sqm_value = re.findall(r'\d+\.\d+', sqm_string[0])
             print(sqm_value)
