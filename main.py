@@ -3,12 +3,13 @@ import os
 import datetime
 import numpy as np
 from matplotlib import pyplot as plt
+import setuptools
 import mplcyberpunk
 from tkinter import filedialog
 import re
 
 def main():
-    time_zone = np.timedelta64(2, 'h')
+    time_zone = np.timedelta64(3, 'h')
     file_path = filedialog.askopenfilename(
         title="Выберите файл",
         initialdir=r'C:\YandexDisk\Astronomy\2do\\',  # \\ to protect '
